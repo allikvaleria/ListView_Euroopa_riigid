@@ -35,7 +35,7 @@ public partial class List_Page : ContentPage
         Riigid = new ObservableCollection<Riik>
         {
             new Riik { Nimi = "Eesti", Pealinn = "Tallinn", Elanikud = 1325000, Lipp = "eesti.jpg" },
-            new Riik { Nimi = "Soome", Pealinn = "Helsinki", Elanikud = 5536000, Lipp = "soome.png" }
+            new Riik { Nimi = "Soome", Pealinn = "Helsinki", Elanikud = 5536000, Lipp = "soome.jpg" }
         };
 
         
