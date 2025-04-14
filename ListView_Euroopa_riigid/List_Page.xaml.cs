@@ -8,19 +8,19 @@ namespace ListView_Euroopa_riigid;
 
 public partial class List_Page : ContentPage
 {
-    // 📌 Модель страны (внутри страницы)
+
     public class Riik
     {
-        public string Nimi { get; set; }       // Название страны
-        public string Pealinn { get; set; }    // Столица
-        public int Elanikud { get; set; }      // Население
-        public string Lipp { get; set; }       // Путь к флагу
+        public string Nimi { get; set; }       
+        public string Pealinn { get; set; }    
+        public int Elanikud { get; set; }      
+        public string Lipp { get; set; }       
     }
 
-    // 🔁 Список стран
+    
     private ObservableCollection<Riik> Riigid { get; set; }
 
-    // UI элементы
+    
     ListView listView;
     Entry nimiEntry, pealinnEntry, elanikudEntry;
     Button lisaBtn, kustutaBtn, valiLippBtn;
@@ -31,32 +31,32 @@ public partial class List_Page : ContentPage
     {
         Title = "Euroopa riigid";
 
-        // 🏳️ Примерные страны
+        
         Riigid = new ObservableCollection<Riik>
         {
             new Riik { Nimi = "Eesti", Pealinn = "Tallinn", Elanikud = 1325000, Lipp = "eesti.png" },
             new Riik { Nimi = "Soome", Pealinn = "Helsinki", Elanikud = 5536000, Lipp = "soome.png" }
         };
 
-        // 🔤 Поля ввода
+        
         nimiEntry = new Entry { Placeholder = "Riigi nimi" };
         pealinnEntry = new Entry { Placeholder = "Pealinn" };
         elanikudEntry = new Entry { Placeholder = "Elanike arv", Keyboard = Keyboard.Numeric };
 
-        // 📸 Выбор фото
+        
         valiLippBtn = new Button { Text = "Vali lipp" };
         valiLippBtn.Clicked += ValiLipp_Clicked;
 
         lippImage = new Image { WidthRequest = 80, HeightRequest = 50, Source = "placeholder.png" };
 
-        // ➕ ➖ Кнопки
+        
         lisaBtn = new Button { Text = "Lisa riik" };
         lisaBtn.Clicked += Lisa_Clicked;
 
         kustutaBtn = new Button { Text = "Kustuta riik" };
         kustutaBtn.Clicked += Kustuta_Clicked;
 
-        // 📃 Список стран
+        
         listView = new ListView
         {
             ItemsSource = Riigid,
@@ -92,7 +92,7 @@ public partial class List_Page : ContentPage
         };
         listView.ItemTapped += ListView_ItemTapped;
 
-        // 📐 Разметка
+        
         Content = new ScrollView
         {
             Content = new StackLayout
@@ -116,7 +116,7 @@ public partial class List_Page : ContentPage
         };
     }
 
-    // ✅ Добавление страны
+    
     private void Lisa_Clicked(object sender, EventArgs e)
     {
         string nimi = nimiEntry.Text?.Trim();
@@ -144,13 +144,13 @@ public partial class List_Page : ContentPage
             Lipp = string.IsNullOrEmpty(valitudLipp) ? "placeholder.png" : valitudLipp
         });
 
-        // ПОчистка полей
+        
         nimiEntry.Text = pealinnEntry.Text = elanikudEntry.Text = string.Empty;
         valitudLipp = null;
         lippImage.Source = "placeholder.png";
     }
 
-    // ❌ Удаление страны
+    
     private void Kustuta_Clicked(object sender, EventArgs e)
     {
         if (listView.SelectedItem is Riik valitud)
@@ -160,7 +160,7 @@ public partial class List_Page : ContentPage
         }
     }
 
-    // 📷 Загрузка флага
+    
     private async void ValiLipp_Clicked(object sender, EventArgs e)
     {
         FileResult foto = await MediaPicker.Default.PickPhotoAsync();
@@ -176,7 +176,7 @@ public partial class List_Page : ContentPage
         }
     }
 
-    // 🔍 Информация о стране
+    
     private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
     {
         if (e.Item is Riik r)
